@@ -2,9 +2,9 @@ import streamlit as st
 import google.generativeai as genai
 import pandas as pd
 import os
-import io
+# import io
 from dotenv import load_dotenv
-import textwrap
+# import textwrap
 from IPython.display import Markdown
 
 # Load environment variables
