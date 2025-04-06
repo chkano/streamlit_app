@@ -183,7 +183,7 @@ def run_query(df, data_dict_df, question, custom_prompt=None):
         explain_prompt = f"""
         The user asked: {question},
         Here is the result: {answer}
-        Answer the question and summarize the answer. Include any relevant insights.
+        Answer the question and summarize the answer same as query language. Include any relevant insights.
         """
         
         explanation_response = model.generate_content(explain_prompt)
@@ -307,7 +307,36 @@ if st.session_state.df is not None:
     else:
         st.info("Please generate or upload a data dictionary first")
 else:
-    st.info("Please upload a CSV file to get started")
+    # Landing page content with Thai instructions
+    st.markdown("""
+    # วิธีใช้งานแอปพลิเคชัน Chat with your CSV
+    
+    แอปพลิเคชันนี้ช่วยให้คุณสามารถสนทนากับข้อมูล CSV ของคุณโดยใช้ภาษาธรรมชาติ
+    
+    ## วิธีการใช้งาน
+    
+    ### 1. อัปโหลดไฟล์ CSV
+    - ไปที่แถบด้านซ้าย (Sidebar)
+    - คลิกปุ่ม "Browse files" เพื่ออัปโหลดไฟล์ CSV ของคุณ
+    
+    ### 2. สร้างพจนานุกรมข้อมูล
+    - หลังจากอัปโหลดไฟล์ CSV แล้ว เลือกวิธีการจัดการพจนานุกรมข้อมูล:
+      - เลือก "No, generate one for me" เพื่อให้ AI สร้างพจนานุกรมข้อมูลโดยอัตโนมัติ แล้วคลิก "Generate Data Dictionary"
+      - หรือเลือก "Yes, I'll upload one" เพื่ออัปโหลดพจนานุกรมข้อมูลของคุณเอง
+    
+    ### 3. ถามคำถามเกี่ยวกับข้อมูล
+    - พิมพ์คำถามของคุณเกี่ยวกับข้อมูลในช่องแชทด้านล่าง
+    - ระบบจะประมวลผลคำถามและแสดงคำตอบในรูปแบบการแชท
+    
+    ### ตัวอย่างคำถาม
+    - "ข้อมูลมีทั้งหมดกี่แถว?"
+    - "ค่าเฉลี่ยของคอลัมน์ [ชื่อคอลัมน์] คือเท่าไร?"
+    - "แสดง 5 แถวแรกที่เรียงตามคอลัมน์ [ชื่อคอลัมน์]"
+    - "ความสัมพันธ์ระหว่างคอลัมน์ [ชื่อคอลัมน์1] และ [ชื่อคอลัมน์2] เป็นอย่างไร?"
+    
+    ### 4. ปรับแต่งเทมเพลตโพรมต์ (ตัวเลือก)
+    - คุณสามารถปรับแต่งเทมเพลตโพรมต์ที่ใช้ในการสร้างคำถามได้ในส่วน "Customize Prompt Template" ที่แถบด้านซ้าย
+    """)
 
 # Add a button to clear chat history
 if st.session_state.chat_history:
